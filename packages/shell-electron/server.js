@@ -29,7 +29,8 @@ io.on('connection', function (socket) {
   })
 
   socket.on('disconnect', (reason) => {
-    if (reason.indexOf('client')) {
+    // Disconnect when there is only one
+    if (socket.server.engine.clientsCount === 1) {
       socket.broadcast.emit('vue-devtools-disconnect-devtools')
     }
   })
